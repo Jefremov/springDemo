@@ -2,10 +2,12 @@ package com.example.springDemo.controllers;
 
 
 import com.example.springDemo.dto.UserRegisterDto;
-import com.example.springDemo.entity.MyUser;
+import com.example.springDemo.entity.DemoUser;
 import com.example.springDemo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/demo")
@@ -20,8 +22,13 @@ public class DemoController {
     }
 
     @GetMapping("showall")
-    public Iterable<MyUser> showAllUsers(){
+    public Iterable<DemoUser> showAllUsers(){
         return userService.showAllUsers();
+    }
+
+    @GetMapping("/show/{userName}")
+    public String showByUserName(@PathVariable("userName") String userName){
+        return userService.showDemoUserByUserName(userName);
     }
 
     @GetMapping("hello")

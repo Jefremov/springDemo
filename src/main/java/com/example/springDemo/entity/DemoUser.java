@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class MyUser {
+public class DemoUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,4 +18,12 @@ public class MyUser {
     @Column(name = "userDescription")
     private String userDescription;
 
+    @Override
+    public String toString() {
+        return "DemoUser{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", userDescription='" + userDescription + '\'' +
+                '}';
+    }
 }
