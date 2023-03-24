@@ -1,12 +1,16 @@
 package com.example.springDemo.repository;
 
-import com.example.springDemo.entity.User;
+import com.example.springDemo.entity.MyUser;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
-public interface UsersRepository extends CrudRepository {
+@Component
+public interface UsersRepository extends CrudRepository<MyUser, Long> {
 
-    Optional<User> findByUserName (String userName);
+    Optional<MyUser> findByUserName (String userName);
+
+    Iterable<MyUser> findAll();
 
 }

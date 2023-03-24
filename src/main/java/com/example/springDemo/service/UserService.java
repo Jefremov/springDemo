@@ -1,13 +1,13 @@
 package com.example.springDemo.service;
 
 import com.example.springDemo.dto.UserRegisterDto;
-import com.example.springDemo.entity.User;
+import com.example.springDemo.entity.MyUser;
 import com.example.springDemo.mappers.UserMapper;
 import com.example.springDemo.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class UserService {
 
 
@@ -22,8 +22,14 @@ public class UserService {
 
     public String createUser(UserRegisterDto userDto) {
 
-        User user = userMapper.userRegisterDtoToUser(userDto);
-        return "User" + userDto.getUserName() + " created";
+        MyUser myUser = userMapper.userRegisterDtoToUser(userDto);
+        usersRepository.save(myUser);
+        return "User" + myUser.getUserName() + " created";
 
     }
+
+    public Iterable<MyUser> showAllUsers(){
+        return usersRepository.findAll();
+    }
+
 }

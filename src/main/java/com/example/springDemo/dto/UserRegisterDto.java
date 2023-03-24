@@ -6,5 +6,6 @@ import lombok.Data;
 public class UserRegisterDto {
 
     private String userName;
-    private String description;
+    private String userDescription;
+
 }
