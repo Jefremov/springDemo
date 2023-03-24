@@ -1,7 +1,7 @@
 package com.example.springDemo.mappers;
 
 import com.example.springDemo.dto.UserRegisterDto;
-import com.example.springDemo.entity.User;
+import com.example.springDemo.entity.DemoUser;
 import com.example.springDemo.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,11 +17,11 @@ public class UserMapper {
     }
 
 
-    public User userRegisterDtoToUser(UserRegisterDto userDto){
+    public DemoUser userRegisterDtoToUser(UserRegisterDto userDto){
 
-        User user = new User();
-        user.setUserName(userDto.getUserName());
-        user.setUserDescription(user.getUserDescription());
-        return user;
+        DemoUser demoUser = new DemoUser();
+        demoUser.setUserName(userDto.getUserName());
+        demoUser.setUserDescription(userDto.getUserDescription());
+        return demoUser;
     }
 }
