@@ -35,19 +35,21 @@ public class UserService {
         return usersRepository.findAll();
     }
 
-    public String showUserByUserName(String userName){
-        if(usersRepository.existsByUserName(userName))
+    public String showUserByUserName(String userName) {
+        if (usersRepository.existsByUserName(userName))
             return usersRepository.findByUserName(userName).toString();
         else return "Error: user " + userName + " not exist";
     }
 
-    public String updateUser(UserUpdateDto userUpdateDto){
-        DemoUser demoUser = userMapper.userUpdateDtoToUser(userUpdateDto);
-        if (!usersRepository.existsByUserName(demoUser.getUserName())) {
+    public String updateUser(UserUpdateDto userUpdateDto) {
+        if (usersRepository.existsByUserName(userUpdateDto.getUserName())) {
+            //      DemoUser demoUser = userMapper.userUpdateDtoToUser(userUpdateDto);
+            DemoUser demoUser = usersRepository.getDemoUserByUserName(userUpdateDto.getUserName());
+            demoUser.setUserDescription(userUpdateDto.getUserDescription());
             usersRepository.save(demoUser);
-            return "User " + demoUser.getUserName() + " updated";
+            return "User " + userUpdateDto.getUserName() + " updated";
         } else
-            return "User " + demoUser.getUserName() + " is not exist";
+            return "User " + userUpdateDto.getUserName() + " is not exist";
     }
 
 }
