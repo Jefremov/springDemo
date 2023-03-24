@@ -1,13 +1,12 @@
 package com.example.springDemo.service;
 
 import com.example.springDemo.dto.UserRegisterDto;
+import com.example.springDemo.dto.UserUpdateDto;
 import com.example.springDemo.entity.DemoUser;
 import com.example.springDemo.mappers.UserMapper;
 import com.example.springDemo.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import java.util.Optional;
 
 @Component
 public class UserService {
@@ -30,17 +29,25 @@ public class UserService {
             return "User " + demoUser.getUserName() + " created";
         } else
             return "User " + demoUser.getUserName() + " is exist. Try another name";
-
     }
 
     public Iterable<DemoUser> showAllUsers() {
         return usersRepository.findAll();
     }
 
-    public String showDemoUserByUserName(String userName){
+    public String showUserByUserName(String userName){
         if(usersRepository.existsByUserName(userName))
             return usersRepository.findByUserName(userName).toString();
         else return "Error: user " + userName + " not exist";
+    }
+
+    public String updateUser(UserUpdateDto userUpdateDto){
+        DemoUser demoUser = userMapper.userUpdateDtoToUser(userUpdateDto);
+        if (!usersRepository.existsByUserName(demoUser.getUserName())) {
+            usersRepository.save(demoUser);
+            return "User " + demoUser.getUserName() + " updated";
+        } else
+            return "User " + demoUser.getUserName() + " is not exist";
     }
 
 }
