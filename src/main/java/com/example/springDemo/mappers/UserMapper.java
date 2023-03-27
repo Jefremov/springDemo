@@ -10,14 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserMapper {
 
-    private UsersRepository usersRepository;
-
-    @Autowired
-    public UserMapper(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
-    }
-
-
     public DemoUser userRegisterDtoToUser(UserRegisterDto userDto){
 
         DemoUser demoUser = new DemoUser();

@@ -42,11 +42,11 @@ public class UserService {
     }
 
     public String updateUser(UserUpdateDto userUpdateDto) {
-        if (usersRepository.existsByUserName(userUpdateDto.getUserName())) {
-            //      DemoUser demoUser = userMapper.userUpdateDtoToUser(userUpdateDto);
-            DemoUser demoUser = usersRepository.getDemoUserByUserName(userUpdateDto.getUserName());
-            demoUser.setUserDescription(userUpdateDto.getUserDescription());
-            usersRepository.save(demoUser);
+        DemoUser demoUser = userMapper.userUpdateDtoToUser(userUpdateDto);
+        if (usersRepository.existsByUserName(demoUser.getUserName())) {
+            DemoUser demoUserRepo = usersRepository.getDemoUserByUserName(userUpdateDto.getUserName());
+            demoUserRepo.setUserDescription(userUpdateDto.getUserDescription());
+            usersRepository.save(demoUserRepo);
             return "User " + userUpdateDto.getUserName() + " updated";
         } else
             return "User " + userUpdateDto.getUserName() + " is not exist";

@@ -3,6 +3,8 @@ package com.example.springDemo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Objects;
+
 
 @Data
 @Entity
@@ -25,5 +27,18 @@ public class DemoUser {
                 ", userName='" + userName + '\'' +
                 ", userDescription='" + userDescription + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DemoUser demoUser = (DemoUser) o;
+        return userName.equals(demoUser.userName) && userDescription.equals(demoUser.userDescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userName, userDescription);
     }
 }
