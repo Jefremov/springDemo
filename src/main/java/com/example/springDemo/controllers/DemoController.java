@@ -5,10 +5,12 @@ import com.example.springDemo.dto.UserRegisterDto;
 import com.example.springDemo.dto.UserUpdateDto;
 import com.example.springDemo.entity.DemoUser;
 import com.example.springDemo.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
 //@RequestMapping("/demo")
 public class DemoController {
 
@@ -17,6 +19,7 @@ public class DemoController {
 
     @PostMapping("/add")
     public String addUser(@RequestBody UserRegisterDto userRegisterDto){
+
         return userService.createUser(userRegisterDto);
     }
 
